@@ -1,10 +1,17 @@
 import Vue from 'vue'
 // import Vuex from 'vuex'
-import Vuex from '../vuex' // 使用自己写的simple vuex
+import Vuex from '../vuex-modules' // 使用自己写的simple vuex
 
 Vue.use(Vuex)
-
+const persits = (store) => {
+  store.subscribe((mutation, state) => {
+    localStorage.setItem('vuex-persits-state', JSON.stringify(state))
+  })
+}
 export default new Vuex.Store({
+  plugins:[
+    persits
+  ],
   state: {
     number: 10
   },
@@ -29,5 +36,27 @@ export default new Vuex.Store({
     }
   },
   modules: {
+    a: {
+      state: {
+        a: 1
+      },
+      modules: {
+        c: {
+          state: {
+            c: 1
+          },
+          mutations: {
+            addOneToNumber (state, payload) {
+              console.log('mutation is calling in C')
+            }
+          }
+        }
+      }
+    },
+    b: {
+      state: {
+        b: 2
+      }
+    }
   }
 })

@@ -5,6 +5,7 @@
     {{$store.getters.doubleNmuber}}
     <button @click="addNumber">Number + 10</button>
     <button @click="addNumberInAction">Number + 1</button>
+    {{$store.state}}
   </div>
 </template>
 
@@ -15,6 +16,7 @@ export default {
     // setInterval(() => {
     //   this.$store.state.number ++
     // }, 1000)
+    // console.log(this.$store._modules)
   },
   methods: {
     addNumber () {
